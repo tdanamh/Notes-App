@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class ProcessLoginController {
 
@@ -12,12 +14,12 @@ public class ProcessLoginController {
     private String emailDB = "dana@gmail.com", passDB = "1234";
 
     @PostMapping("/processLogin")
-    public String processLogin(@RequestParam String email, @RequestParam String pass, Model model) {
+    public String processLogin(@RequestParam String email, @RequestParam String pass, Model model, HttpServletRequest request) {
         if ( !email.equals(emailDB) || ! pass.equals(passDB)){
             model.addAttribute("check", "Username or password incorrect!");
             return "index";
         }
-        model.addAttribute("check", email);
-        return "notes";
+        request.getSession().setAttribute("user", email);
+        return "redirect:/notes";
     }
 }
