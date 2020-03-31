@@ -26,8 +26,8 @@
         <div class="sidebar-heading">Notes App </div>
         <div class="list-group list-group-flush">
             <a href="/notes" class="list-group-item list-group-item-action bg-light">Your Notes</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-            <a href="/shortcuts" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+            <a href="/profile" class="list-group-item list-group-item-action bg-light">Profile</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -62,7 +62,17 @@
         </nav>
 
         <div class="container-fluid">
-            <h1 th:if="${check != null}" th:text="'Welcome ' + ${check}"></h1>
+            <div class="container">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="nToNotes" th:checked="${nToNotes}">
+                    <label class="form-check-label" for="nToNotes">Press Shift + n key to view your notes</label>
+                </div>
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="pToProfile" th:checked="${pToProfile}">
+                    <label class="form-check-label" for="pToProfile">Press shift + p key to redirect to your profile page</label>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
