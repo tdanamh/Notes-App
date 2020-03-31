@@ -17,8 +17,14 @@ public class ProcessRegisterController {
             model.addAttribute("check","Your passwords don't match!");
             return "register";
         } else {
-            repository.save(new User(email, pass));
-            model.addAttribute("check", "Account created successfully!");
+            if (repository.findByEmail(email) == null){ // If the email is not already in database
+                repository.save(new User(email, pass));
+                model.addAttribute("check", "Account created successfully!");
+            }
+            else {
+                model.addAttribute("check", "User already exists!");
+                return "register";
+            }
         }
         return "index";
     }
