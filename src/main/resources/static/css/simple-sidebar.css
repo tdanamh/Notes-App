@@ -47,3 +47,17 @@ body {
     margin-left: -15rem;
   }
 }
+
+.new {
+  background-color: #efefef;
+}
+
+.new-input {
+  background-color: transparent;
+  outline: none;
+  border:none;
+}
+
+input.new-input {
+  font-size: 20px;
+}
