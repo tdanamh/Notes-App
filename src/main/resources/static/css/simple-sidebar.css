@@ -62,6 +62,6 @@ input.new-input {
   font-size: 20px;
 }
 
-.new-note {
-  margin-left: 0;
+.new-card {
+  width: 100% !important;
 }
