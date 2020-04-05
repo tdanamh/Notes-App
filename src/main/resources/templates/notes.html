@@ -96,6 +96,7 @@
                                     <input type="text" name="id" hidden th:value="${note.id}">
                                     <button type="submit" class="btn btn-primary">Delete Note</button>
                                 </form>
+                                <button type="button" class="btn btn-success share-button" data-toggle="modal" data-target="#shareNotesModal">Share Note</button>
                             </div>
                             <div class="card-footer text-muted">
                                 2 days ago
@@ -109,6 +110,31 @@
     <!-- /#page-content-wrapper -->
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="shareNotesModal" tabindex="-1" role="dialog" aria-labelledby="shareNotesModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="shareNotesModalLabel">Share note</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/shareNote" method="post">
+                <div class="modal-body">
+                    <input id="shareId" type="text" hidden name="id">
+                    <input type="email" name="shareEmail" required placeholder="Email...">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Share</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- /#wrapper -->
 
 <!-- Bootstrap core JavaScript -->
@@ -127,6 +153,15 @@
         force_br_newlines : true,
         force_p_newlines : false
     });
+
+    // Share button
+    $(".share-button").on('click', function(e) {
+        let parent = $(e.target).parent();
+        let noteIdInput = parent.find($("input[name='id']"));
+        let noteId = $(noteIdInput).val();
+        $("#shareId").val(noteId);
+    });
+
 </script>
 
 <script th:src="@{js/checkShortcuts.js}"></script>

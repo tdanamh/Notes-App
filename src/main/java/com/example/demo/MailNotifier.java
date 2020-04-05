@@ -14,7 +14,7 @@ public class MailNotifier {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendHtmlEmail(String title, String text, String receiver) throws MessagingException, IOException {
+    public void sendHtmlEmail(String content, String title, String text, String receiver) throws MessagingException, IOException {
 
         MimeMessage msg = javaMailSender.createMimeMessage();
 
@@ -28,10 +28,10 @@ public class MailNotifier {
 //        helper.setText("Check attachment for image!");
 
 //         true = text/html
-        helper.setText("Hello! You added a new note. <br>" +
+        helper.setText(content + "<br>" +
                 "Title: " + title + "<br>" +
-                "Content: " + text + "<br>" +
-                " You can check it on the website.", true);
+                "Content: " + text + "<br>",
+               true);
 
         // For attachment
         //FileSystemResource file = new FileSystemResource(new File("path/android.png"));

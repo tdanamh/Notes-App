@@ -25,7 +25,8 @@ public class AddNoteController {
         repository.save(new Note(title, text));
         request.getSession().setAttribute("noteAdded", true);
         try {
-            mailSender.sendHtmlEmail(title, text, request.getSession().getAttribute("user").toString());
+            String content = "Hello. You just added a new note.";
+            mailSender.sendHtmlEmail(content, title, text, request.getSession().getAttribute("user").toString());
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
         }
