@@ -14,6 +14,10 @@ public class DeleteNoteController {
 
     @PostMapping("/deleteNote")
     public String deleteNote(@RequestParam String id, HttpServletRequest request) {
+//        Secure
+        if (request.getSession().getAttribute("user") == null) {
+            return "redirect:/index";
+        }
         repository.deleteById(id);
         request.getSession().setAttribute("noteDeleted", true);
         return "redirect:/notes";
