@@ -65,3 +65,18 @@ input.new-input {
 .new-card {
   width: 100% !important;
 }
+
+.card-text {
+  overflow-y: scroll;
+  height: 96px;
+}
+
+.successMessage {
+  background-color: lightgreen;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.col-sm-4 {
+  margin-bottom: 15px;
+}
