@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shortcuts</title>
+    <title>Settings</title>
 
     <link rel="icon" type="image/png" th:href="@{/images/icons/icon1.png}"/>
 
@@ -29,7 +29,7 @@
         <div class="list-group list-group-flush">
             <a href="/notes" class="list-group-item list-group-item-action bg-light">Your Notes</a>
             <a href="/profile" class="list-group-item list-group-item-action bg-light">Profile</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+            <a href="/shortcuts" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -54,7 +54,7 @@
                             Dropdown
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/settings">Settings</a>
+                            <a class="dropdown-item" href="#">Settings</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout">Log out</a>
                         </div>
@@ -64,17 +64,7 @@
         </nav>
 
         <div class="container-fluid">
-            <div class="container">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="nToNotes" th:checked="${nToNotes}">
-                    <label class="form-check-label" for="nToNotes">Press Shift + n key to view your notes</label>
-                </div>
-
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="pToProfile" th:checked="${pToProfile}">
-                    <label class="form-check-label" for="pToProfile">Press shift + p key to redirect to your profile page</label>
-                </div>
-            </div>
+            <h1>Settings</h1>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
