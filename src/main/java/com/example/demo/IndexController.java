@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController {
 
-    @GetMapping("/index")
+    @GetMapping({"/index", "/"})
     public String index(HttpServletRequest request) {
         if (request.getSession().getAttribute("user") != null){
             return "redirect:/notes";

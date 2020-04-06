@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProcessRegisterController {
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+    @Autowired
+    private ShortcutRepository shortcutRepository;
 
     @PostMapping("/processRegister")
     public String processRegister(@RequestParam String email, @RequestParam String pass, @RequestParam String cpass, Model model) {
@@ -17,8 +19,11 @@ public class ProcessRegisterController {
             model.addAttribute("check","Your passwords don't match!");
             return "register";
         } else {
-            if (repository.findByEmail(email) == null){ // If the email is not already in database
-                repository.save(new User(email, pass));
+            if (userRepository.findByEmail(email) == null) { // If the email is not already in database
+                User user = new User(email, pass);
+                userRepository.save(user);
+                String userId = userRepository.findByEmail(email).id;
+                shortcutRepository.save(new Shortcut(userId, true, true));
                 model.addAttribute("check", "Account created successfully!");
             }
             else {
