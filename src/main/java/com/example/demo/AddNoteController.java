@@ -14,6 +14,8 @@ public class AddNoteController {
     @Autowired
     private NoteRepository repository;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private MailNotifier mailSender;
 
     @PostMapping("/addNote")
@@ -22,7 +24,12 @@ public class AddNoteController {
         if (request.getSession().getAttribute("user") == null) {
             return "redirect:/index";
         }
-        repository.save(new Note(title, text));
+        // Get user id in order to save the note by specific user
+        String email = request.getSession().getAttribute("user").toString();
+        User user = userRepository.findByEmail(email);
+        String userId = user.id;
+        repository.save(new Note(userId, title, text));
+
         request.getSession().setAttribute("noteAdded", true);
         try {
             String content = "Hello. You just added a new note.";
