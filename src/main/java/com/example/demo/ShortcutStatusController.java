@@ -21,17 +21,17 @@ public class ShortcutStatusController {
 
     @GetMapping("/shortcutStatus")
     public Map<String, Boolean> shortcutStatus(HttpServletRequest request) {
+        Map<String, Boolean> shortcutMap = new HashMap<String, Boolean>();
         if (request.getSession().getAttribute("user") != null) {
             String email = request.getSession().getAttribute("user").toString();
             User user = userRepository.findByEmail(email);
             String userId = user.id;
             Shortcut shortcut = shortcutRepository.findByUserId(userId);
 
-            Map<String, Boolean> shortcutMap = new HashMap<String, Boolean>();
             shortcutMap.put("nToNotes", shortcut.nToNotes);
             shortcutMap.put("pToProfile", shortcut.pToProfile);
             return shortcutMap;
         }
-        return null;
+        return shortcutMap;
     }
 }
