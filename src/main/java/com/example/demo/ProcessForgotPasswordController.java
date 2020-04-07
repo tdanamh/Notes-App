@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 @Controller
-public class ProcessForgetPasswordController {
+public class ProcessForgotPasswordController {
 
     @Autowired
     UserRepository userRepository;
@@ -23,8 +23,8 @@ public class ProcessForgetPasswordController {
     @Autowired
     MailNotifier mailNotifier;
 
-    @PostMapping("/processForgetPassword")
-    public String processForgetPassword(@RequestParam String email, Model model, HttpServletRequest request)
+    @PostMapping("/processForgotPassword")
+    public String processForgotPassword(@RequestParam String email, Model model, HttpServletRequest request)
     {
         User user = userRepository.findByEmail(email);
         if (user != null) {
@@ -41,7 +41,7 @@ public class ProcessForgetPasswordController {
         } else {
             request.getSession().setAttribute("message", "We didn't find an account registered with your email. Maybe you would like to sign up.");
         }
-        return "redirect:/forgetPassword";
+        return "redirect:/forgotPassword";
     }
 
     private String generateRandomPassword(int size)
