@@ -84,7 +84,7 @@
                     <th scope="row" th:text="${note.id}"></th>
                     <td th:text="${note.userId}"></td>
                     <td th:text="${note.title}"></td>
-                    <td th:text="${note.text}"></td>
+                    <td th:utext="${note.text}"></td>
                     <td><a th:href="${'/adminDeleteNote?id=' + note.id}">Delete note</a></td>
                 </tr>
                 </tbody>
