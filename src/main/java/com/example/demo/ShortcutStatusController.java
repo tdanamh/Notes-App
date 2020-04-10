@@ -10,8 +10,6 @@ import java.util.Map;
 
 @RestController
 public class ShortcutStatusController {
-    boolean nToNotes = true;
-    boolean pToProfile = false;
 
     @Autowired
     private UserRepository userRepository;
@@ -28,8 +26,8 @@ public class ShortcutStatusController {
             String userId = user.id;
             Shortcut shortcut = shortcutRepository.findByUserId(userId);
 
-            shortcutMap.put("nToNotes", shortcut.nToNotes);
-            shortcutMap.put("pToProfile", shortcut.pToProfile);
+            shortcutMap.put("notesShortcut", shortcut.notesShortcut);
+            shortcutMap.put("profileShortcut", shortcut.profileShortcut);
             return shortcutMap;
         }
         return shortcutMap;
