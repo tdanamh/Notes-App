@@ -15,7 +15,7 @@ public class ChangeShortcutsController {
     private UserRepository userRepository;
 
     @PostMapping("/changeShortcuts")
-    public String changeShortcuts(@RequestParam(defaultValue = "false") Boolean nToNotes, @RequestParam(defaultValue = "false") Boolean pToProfile, HttpServletRequest request) {
+    public String changeShortcuts(@RequestParam(defaultValue = "false") Boolean notesShortcut, @RequestParam(defaultValue = "false") Boolean profileShortcut, HttpServletRequest request) {
 //        Secure
         if (request.getSession().getAttribute("user") == null) {
             return "redirect:/index";
@@ -24,8 +24,8 @@ public class ChangeShortcutsController {
         User user = userRepository.findByEmail(email);
 
         Shortcut userShortcut = shortcutRepository.findByUserId(user.id);
-        userShortcut.pToProfile = pToProfile;
-        userShortcut.nToNotes = nToNotes;
+        userShortcut.profileShortcut = profileShortcut;
+        userShortcut.notesShortcut = notesShortcut;
         shortcutRepository.save(userShortcut);
         return "redirect:/shortcuts";
     }

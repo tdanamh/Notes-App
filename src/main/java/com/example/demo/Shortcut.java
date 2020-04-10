@@ -7,12 +7,12 @@ public class Shortcut {
     public String id;
 
     public String userId;
-    public boolean nToNotes;
-    public boolean pToProfile;
+    public boolean notesShortcut;
+    public boolean profileShortcut;
 
-    public Shortcut(String userId, boolean nToNotes,  boolean pToProfile) {
+    public Shortcut(String userId, boolean notesShortcut,  boolean profileShortcut) {
         this.userId = userId;
-        this.nToNotes = nToNotes;
-        this.pToProfile = pToProfile;
+        this.notesShortcut = notesShortcut;
+        this.profileShortcut = profileShortcut;
     }
 }

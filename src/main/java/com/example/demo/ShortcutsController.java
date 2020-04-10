@@ -23,8 +23,8 @@ public class ShortcutsController {
 
             Shortcut shortcuts = shortcutRepository.findByUserId(user.id);
 
-            model.addAttribute("nToNotes", shortcuts.nToNotes);
-            model.addAttribute("pToProfile", shortcuts.pToProfile);
+            model.addAttribute("notesShortcut", shortcuts.notesShortcut);
+            model.addAttribute("profileShortcut", shortcuts.profileShortcut);
             return "shortcuts";
         }
         return "redirect:/index";

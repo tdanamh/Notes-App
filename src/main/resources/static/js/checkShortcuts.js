@@ -1,10 +1,10 @@
-let pToProfile, nToNotes;
+let profileShortcut, notesShortcut;
 $.ajax({
     url: "/shortcutStatus"
 }).done(function(data) {
     if (data != null) {
-        pToProfile = data["pToProfile"];
-        nToNotes = data["nToNotes"];
+        profileShortcut = data["profileShortcut"];
+        notesShortcut = data["notesShortcut"];
     }
 });
 
@@ -15,11 +15,12 @@ $(document).keydown(function(e) {
     if (e.keyCode in keyMap) {
         keyMap[e.keyCode] = true;
         // 1 + n
-        if (keyMap[49] && keyMap[78]) {
+        if (keyMap[49] && keyMap[78] && notesShortcut) {
+
             window.location.replace("/notes");
         }
         // 2 + p
-        if (keyMap[50] && keyMap[80]) {
+        if (keyMap[50] && keyMap[80] && profileShortcut) {
             window.location.replace("/profile");
         }
     }
