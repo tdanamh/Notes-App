@@ -19,6 +19,7 @@ public class NotesController {
     @GetMapping("/notes")
     public String notes(Model model, HttpServletRequest request) {
         if (request.getSession().getAttribute("user") != null) {
+
             if (request.getSession().getAttribute("noteAdded") != null) {
                 model.addAttribute("successMessage", "Your note has been successfully added!");
                 request.getSession().setAttribute("noteAdded", null);
