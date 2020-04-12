@@ -75,8 +75,12 @@
                             <div class="card new-card" style="width: 18rem;">
                                 <div class="card-body new">
                                     <input class="new-input" type="text" name="title" placeholder="Note Title..." required="true">
+                                        <input type="text" name="category" list="category-list" placeholder="Select a category..." class="new-input" autocomplete="off">
+                                        <datalist id="category-list">
+                                            <option th:if="${#lists.size(categories) != 0}" th:each="category : ${categories}" th:value="${category}">
+                                        </datalist>
                                     <textarea id="new-text" class="new-input" name="text" placeholder="Note Text..." cols="25" rows="5"></textarea>
-                                    <button type="submit" class="btn btn-dark">Add New Note</button>
+                                    <button type="submit" class="new-note-button btn btn-dark">Add New Note</button>
                                 </div>
                             </div>
                         </form>
@@ -85,6 +89,16 @@
             </div>
             <center><h1 class="mt-4">Your Notes</h1></center>
             <p th:if="${#lists.size(notes) == 0}" th:text="${'No available notes. Please add a new note.'}"></p>
+            <div>
+                <form action="/notes" class="filter">
+                    <h5>Filter by</h5>
+                    <select id="category-filter" name="filter">
+                        <option th:if="${#lists.size(categories) != 0}" th:each="category : ${categories}" th:name="${category}" th:text="${category}">
+                        <option value="">No filter</option>
+                    </select>
+                    <button type="submit" class="filter-button btn btn-danger">Apply filters</button>
+                </form>
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4" th:each="note : ${notes}">
@@ -97,6 +111,7 @@
                                     <button type="submit" class="btn btn-primary">Delete Note</button>
                                 </form>
                                 <button type="button" class="btn btn-success share-button" data-toggle="modal" data-target="#shareNotesModal">Share Note</button>
+                                <h5 class="card-category"  th:utext="'#' + ${note.category}"></h5>
                             </div>
                             <div class="card-footer text-muted">
                                 2 days ago

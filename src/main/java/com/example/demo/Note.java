@@ -9,10 +9,12 @@ public class Note {
     public String userId;
     public String title;
     public String text;
+    public String category;
 
-    public Note(String userId, String title, String text) {
+    public Note(String userId, String title, String category, String text) {
         this.userId = userId;
         this.title = title;
+        this.category = category;
         this.text = text;
     }
 }
