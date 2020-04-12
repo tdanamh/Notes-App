@@ -105,3 +105,8 @@ security these days.
 **_Admin page diagram_**
 
 ![admin_page](https://github.com/tdanamh/PROIECT_MDS/blob/master/src/main/resources/static/images/AdminPage.png)
+
+
+## Project Architecture diagram ##
+
+![architecture](https://github.com/tdanamh/PROIECT_MDS/blob/master/src/main/resources/static/images/Arhitectura.png)
