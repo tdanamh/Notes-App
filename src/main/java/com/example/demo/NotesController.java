@@ -27,6 +27,11 @@ public class NotesController {
                 if (request.getSession().getAttribute("noteDeleted") != null) {
                     model.addAttribute("successMessage", "Your note has been successfully deleted!");
                     request.getSession().setAttribute("noteDeleted", null);
+                } else {
+                    if (request.getSession().getAttribute("noteShared") != null) {
+                        model.addAttribute("successMessage", "Your note has been successfully shared!");
+                        request.getSession().setAttribute("noteShared", null);
+                    }
                 }
             }
             // Get current user id
