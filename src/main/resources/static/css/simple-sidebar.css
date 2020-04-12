@@ -50,12 +50,11 @@ body {
 
 .new {
   background-color: #efefef;
+  display: grid;
 }
 
 .new-input {
-  background-color: transparent;
-  outline: none;
-  border:none;
+  border: 0.5px solid #f9f0f0
 }
 
 input.new-input {
@@ -83,4 +82,27 @@ input.new-input {
 
 .share-button {
   margin-top: 5px;
+}
+
+.tox {
+  border: 0.5px solid #f9f0f0 !important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  padding: 0.5rem;
+  font-size: 15px;
+}
+
+.new-note-button {
+  margin-top: 10px;
+}
+
+.filter {
+  padding: 20px 0;
+  display: grid;
+  width: 25rem;
+}
+
+.filter-button {
+  margin-top: 10px;
 }

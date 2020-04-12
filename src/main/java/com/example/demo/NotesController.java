@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -41,6 +44,20 @@ public class NotesController {
 
             // Get all notes by user id and send them to model
             List<Note> notes = noteRepository.findByUserId(userId);
+
+            // Get all categories by user id and send them to model
+            HashSet<String> categories = new HashSet<>();
+            for (Note note: notes) {
+                if (note.category != null) {
+                    categories.add(note.category);
+                }
+            }
+            model.addAttribute("categories", categories);
+
+            if (request.getParameter("filter") != null && !request.getParameter("filter").equals("")) {
+                notes = noteRepository.findByUserIdAndCategory(userId, request.getParameter("filter"));
+            }
+
             // Reverse list
             Collections.reverse(notes);
             model.addAttribute("notes", notes);
