@@ -14,29 +14,35 @@ public class MailNotifier {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendHtmlEmail(String content, String title, String text, String receiver) throws MessagingException, IOException {
-
+    public void noteNotifierEmail(String subject, String content, String title, String text, String receiver) throws MessagingException, IOException {
         MimeMessage msg = javaMailSender.createMimeMessage();
 
         // true = multipart message
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 
         helper.setTo(receiver);
+        helper.setSubject(subject);
 
-        helper.setSubject("New note added");
-//        For simple text default = text/plain
-//        helper.setText("Check attachment for image!");
-
-//         true = text/html
+        // true = text/html
         helper.setText(content + "<br>" +
                 "Title: " + title + "<br>" +
                 "Content: " + text + "<br>",
                true);
 
-        // For attachment
-        //FileSystemResource file = new FileSystemResource(new File("path/android.png"));
+        javaMailSender.send(msg);
+    }
+    public void forgotPasswordEmail(String subject, String content, String receiver) throws MessagingException, IOException {
+        MimeMessage msg = javaMailSender.createMimeMessage();
+
+        // true = multipart message
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+
+        helper.setTo(receiver);
+        helper.setSubject(subject);
+
+        // true = text/html
+        helper.setText(content, true);
 
         javaMailSender.send(msg);
-
     }
 }

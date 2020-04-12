@@ -29,16 +29,16 @@ public class ShareNoteController {
             String noteTitle = existingNote.title;
             String noteText = existingNote.text;
             try {
-                String content = "Hello from Notes App. The user " + request.getSession().getAttribute("user") +
-                        " shared with you the following note: ";
-                mailSender.sendHtmlEmail(content, noteTitle, noteText, shareEmail);
+                String content = "Hello from Notes App. The user " + request.getSession().getAttribute("user") + " shared with you the following note: ";
+                String subject = "Shared note";
+                mailSender.noteNotifierEmail(subject, content, noteTitle, noteText, shareEmail);
             } catch (MessagingException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        request.getSession().setAttribute("noteDeleted", true);
+        request.getSession().setAttribute("noteShared", true);
         return "redirect:/notes";
     }
 }

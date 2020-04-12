@@ -31,7 +31,9 @@ public class ProcessForgotPasswordController {
             try {
                 user.password = generateRandomPassword(8);
                 userRepository.save(user);
-                mailNotifier.sendHtmlEmail("Your password has been reset!",  user.password, "You can login using your new password.", email);
+                String subject = "Your password has been reset!";
+                String content = "Your new password is " + user.password;
+                mailNotifier.forgotPasswordEmail(subject, content, email);
             } catch (MessagingException e) {
                 e.printStackTrace();
             } catch (IOException e) {

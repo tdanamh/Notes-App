@@ -33,7 +33,8 @@ public class AddNoteController {
         request.getSession().setAttribute("noteAdded", true);
         try {
             String content = "Hello. You just added a new note.";
-            mailSender.sendHtmlEmail(content, title, text, request.getSession().getAttribute("user").toString());
+            String subject = "New note";
+            mailSender.noteNotifierEmail(subject, content, title, text, email);
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
         }
