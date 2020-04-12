@@ -69,15 +69,39 @@ We may stuck a little in making the site really **secure**. We may not be fully 
 security these days.
 
 
-Use case diagrams:
 
-## Sign in diagram ##
+## Use case diagrams ##
+
+**_Sign in diagram_**
+
 ![Sign_in](https://github.com/tdanamh/PROIECT_MDS/blob/master/src/main/resources/static/images/Sign_in.png)
 
 
-## Sign up diagram ##
+**_Sign up diagram_**
+
 ![Sign_up](https://github.com/tdanamh/PROIECT_MDS/blob/master/src/main/resources/static/images/Sign_up.png)
 
 
-## Notes app diagram ##
+**_Notes app diagram_**
+
 ![Notes_app](https://github.com/tdanamh/PROIECT_MDS/blob/master/src/main/resources/static/images/Notes_app.png)
+
+
+
+## State transition diagrams ##
+
+**_Index page diagram_**
+
+![index_page](https://github.com/tdanamh/PROIECT_MDS/blob/master/src/main/resources/static/images/IndexPage.png)
+
+**_Notes page diagram_**
+
+![notes_page](https://github.com/tdanamh/PROIECT_MDS/blob/master/src/main/resources/static/images/NotesPage.png)
+
+**_Admin Login page diagram_**
+
+![admin_login_page](https://github.com/tdanamh/PROIECT_MDS/blob/master/src/main/resources/static/images/AdminLoginPage.png)
+
+**_Admin page diagram_**
+
+![admin_page](https://github.com/tdanamh/PROIECT_MDS/blob/master/src/main/resources/static/images/AdminPage.png)
