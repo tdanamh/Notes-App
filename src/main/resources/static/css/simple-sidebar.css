@@ -106,3 +106,9 @@ input.new-input {
 .filter-button {
   margin-top: 10px;
 }
+
+.card-due {
+  background-color: lightgreen;
+  border-radius: 5px;
+  padding: 5px;
+}

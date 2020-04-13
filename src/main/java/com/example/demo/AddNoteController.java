@@ -19,8 +19,11 @@ public class AddNoteController {
     private MailNotifier mailSender;
 
     @PostMapping("/addNote")
-    public String addNote(@RequestParam String title, @RequestParam String category, @RequestParam String text, HttpServletRequest request) {
+    public String addNote(@RequestParam String title, @RequestParam String category, @RequestParam String text, HttpServletRequest request, @RequestParam String due) {
 //        Secure
+        if (due.equals("")) {
+            due = "Not set";
+        }
         if (request.getSession().getAttribute("user") == null) {
             return "redirect:/index";
         }
@@ -28,7 +31,7 @@ public class AddNoteController {
         String email = request.getSession().getAttribute("user").toString();
         User user = userRepository.findByEmail(email);
         String userId = user.id;
-        repository.save(new Note(userId, title, category, text));
+        repository.save(new Note(userId, title, category, text, due));
 
         request.getSession().setAttribute("noteAdded", true);
         try {
