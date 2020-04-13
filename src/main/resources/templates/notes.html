@@ -75,10 +75,11 @@
                             <div class="card new-card" style="width: 18rem;">
                                 <div class="card-body new">
                                     <input class="new-input" type="text" name="title" placeholder="Note Title..." required="true">
-                                        <input type="text" name="category" list="category-list" placeholder="Select a category..." class="new-input" autocomplete="off">
-                                        <datalist id="category-list">
-                                            <option th:if="${#lists.size(categories) != 0}" th:each="category : ${categories}" th:value="${category}">
-                                        </datalist>
+                                    <input placeholder="Due date" class="new-input textbox-n" name="due" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
+                                    <input type="text" name="category" list="category-list" placeholder="Select a category..." class="new-input" autocomplete="off">
+                                    <datalist id="category-list">
+                                        <option th:if="${#lists.size(categories) != 0}" th:each="category : ${categories}" th:value="${category}">
+                                    </datalist>
                                     <textarea id="new-text" class="new-input" name="text" placeholder="Note Text..." cols="25" rows="5"></textarea>
                                     <button type="submit" class="new-note-button btn btn-dark">Add New Note</button>
                                 </div>
@@ -112,6 +113,7 @@
                                 </form>
                                 <button type="button" class="btn btn-success share-button" data-toggle="modal" data-target="#shareNotesModal">Share Note</button>
                                 <h5 class="card-category"  th:utext="'#' + ${note.category}"></h5>
+                                <h6 class="card-due"  th:utext="'Until: ' + ${note.dueDate}"></h6>
                             </div>
                             <div class="card-footer text-muted">
                                 2 days ago
