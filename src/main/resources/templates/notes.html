@@ -141,7 +141,14 @@
             <form action="/shareNote" method="post">
                 <div class="modal-body">
                     <input id="shareId" type="text" hidden name="id">
-                    <input type="email" name="shareEmail" required placeholder="Email...">
+                    <div class="modal-text">
+                        <span>By Email</span>
+                        <input class="new-input" type="email" name="shareEmail" placeholder="Email..." autocomplete="off">
+                    </div>
+                    <div class="modal-text">
+                        <span>By Group Name</span>
+                        <input class="new-input" type="text" name="shareGroupName" placeholder="Group Name..." autocomplete="off">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

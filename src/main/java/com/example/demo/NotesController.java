@@ -21,49 +21,58 @@ public class NotesController {
 
     @GetMapping("/notes")
     public String notes(Model model, HttpServletRequest request) {
-        if (request.getSession().getAttribute("user") != null) {
-
-            if (request.getSession().getAttribute("noteAdded") != null) {
-                model.addAttribute("successMessage", "Your note has been successfully added!");
-                request.getSession().setAttribute("noteAdded", null);
-            } else {
-                if (request.getSession().getAttribute("noteDeleted") != null) {
-                    model.addAttribute("successMessage", "Your note has been successfully deleted!");
-                    request.getSession().setAttribute("noteDeleted", null);
-                } else {
-                    if (request.getSession().getAttribute("noteShared") != null) {
-                        model.addAttribute("successMessage", "Your note has been successfully shared!");
-                        request.getSession().setAttribute("noteShared", null);
-                    }
-                }
-            }
-            // Get current user id
-            String email = request.getSession().getAttribute("user").toString();
-            User user = userRepository.findByEmail(email);
-            String userId = user.id;
-
-            // Get all notes by user id and send them to model
-            List<Note> notes = noteRepository.findByUserId(userId);
-
-            // Get all categories by user id and send them to model
-            HashSet<String> categories = new HashSet<>();
-            for (Note note: notes) {
-                if (note.category != null) {
-                    categories.add(note.category);
-                }
-            }
-            model.addAttribute("categories", categories);
-
-            if (request.getParameter("filter") != null && !request.getParameter("filter").equals("")) {
-                notes = noteRepository.findByUserIdAndCategory(userId, request.getParameter("filter"));
-            }
-
-            // Reverse list
-            Collections.reverse(notes);
-            model.addAttribute("notes", notes);
-
-            return "notes";
+        // Secure
+        if (request.getSession().getAttribute("user") == null) {
+            return "redirect:/index";
         }
-        return "redirect:/index";
+        if (request.getSession().getAttribute("noteAdded") != null) {
+            model.addAttribute("successMessage", "Your note has been successfully added!");
+            request.getSession().setAttribute("noteAdded", null);
+        } else if (request.getSession().getAttribute("noteDeleted") != null) {
+            model.addAttribute("successMessage", "Your note has been successfully deleted!");
+            request.getSession().setAttribute("noteDeleted", null);
+        } else if (request.getSession().getAttribute("noteShared") != null) {
+            model.addAttribute("successMessage", "Your note has been successfully shared!");
+            request.getSession().setAttribute("noteShared", null);
+        }  else if (request.getSession().getAttribute("noteSharedToGroup") != null) {
+            model.addAttribute("successMessage", "Your note has been successfully shared to a group and added to their private notes!");
+            request.getSession().setAttribute("noteSharedToGroup", null);
+        } else if (request.getSession().getAttribute("errorEmpty") != null) {
+            model.addAttribute("successMessage", "You are trying to share a note without a receiver!");
+            request.getSession().setAttribute("errorEmpty", null);
+        }  else if (request.getSession().getAttribute("errorTooMany") != null) {
+            model.addAttribute("successMessage", "You can't share a note both to email and group!");
+            request.getSession().setAttribute("errorTooMany", null);
+        } else if (request.getSession().getAttribute("errorInvalidGroupName") != null) {
+            model.addAttribute("successMessage", "You typed an invalid group name!");
+            request.getSession().setAttribute("errorInvalidGroupName", null);
+        }
+
+        // Get current user id
+        String email = (String)request.getSession().getAttribute("user");
+        User user = userRepository.findByEmail(email);
+        String userId = user.id;
+
+        // Get all notes by user id and send them to model
+        List<Note> notes = noteRepository.findByUserId(userId);
+
+        // Get all categories by user id and send them to model
+        HashSet<String> categories = new HashSet<>();
+        for (Note note: notes) {
+            if (note.category != null) {
+                categories.add(note.category);
+            }
+        }
+        model.addAttribute("categories", categories);
+
+        if (request.getParameter("filter") != null && !request.getParameter("filter").equals("")) {
+            notes = noteRepository.findByUserIdAndCategory(userId, request.getParameter("filter"));
+        }
+
+        // Reverse list
+        Collections.reverse(notes);
+        model.addAttribute("notes", notes);
+        return "notes";
     }
+
 }

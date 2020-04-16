@@ -15,12 +15,12 @@ public class AddNewGroupController {
     private GroupRepository groupRepository;
 
     @PostMapping("/addNewGroup")
-    public String addNewGroup(@RequestParam(required = false) String emails, HttpServletRequest request) {
+    public String addNewGroup(@RequestParam String name, @RequestParam(required = false) String emails, HttpServletRequest request) {
         // Secure
         if (request.getSession().getAttribute("user") == null) {
             return "redirect:/index";
         }
-        // Check if emails are null
+        // Check if group is empty
         if (emails == null) {
             request.getSession().setAttribute("error", true);
         } else {
@@ -28,7 +28,7 @@ public class AddNewGroupController {
             String email = (String)request.getSession().getAttribute("user");
             User user = userRepository.findByEmail(email);
             String userId = user.id;
-            groupRepository.save(new Group(userId, emails));
+            groupRepository.save(new Group(name, userId, emails));
             request.getSession().setAttribute("groupAdded", true);
         }
         return "redirect:/groups";

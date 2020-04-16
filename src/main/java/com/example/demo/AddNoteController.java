@@ -12,7 +12,7 @@ import java.io.IOException;
 @Controller
 public class AddNoteController {
     @Autowired
-    private NoteRepository repository;
+    private NoteRepository noteRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -31,7 +31,7 @@ public class AddNoteController {
         String email = request.getSession().getAttribute("user").toString();
         User user = userRepository.findByEmail(email);
         String userId = user.id;
-        repository.save(new Note(userId, title, category, text, due));
+        noteRepository.save(new Note(userId, title, category, text, due));
 
         request.getSession().setAttribute("noteAdded", true);
         try {
