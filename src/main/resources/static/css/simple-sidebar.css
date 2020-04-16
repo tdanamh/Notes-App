@@ -112,3 +112,25 @@ input.new-input {
   border-radius: 5px;
   padding: 5px;
 }
+
+.new-group {
+  display: grid;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+.new-group-form {
+  display: grid;
+}
+.button-add-group {
+  margin-top: 10px;
+}
+
+.existing-groups {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.group {
+  margin-bottom: 10px;
+  padding: 10px;
+}

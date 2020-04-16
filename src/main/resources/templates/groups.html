@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Settings</title>
+    <title>Groups</title>
 
     <link rel="icon" type="image/png" th:href="@{/images/icons/icon1.png}"/>
 
@@ -54,7 +54,7 @@
                             Dropdown
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Settings</a>
+                            <a class="dropdown-item" href="#">Groups</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout">Log out</a>
                         </div>
@@ -64,7 +64,31 @@
         </nav>
 
         <div class="container-fluid">
-            <h1>Settings</h1>
+            <p class="successMessage" th:if="${successMessage != null}" th:text="${successMessage}"></p>
+
+            <div class="new-group">
+                <center><h1>Add a new group</h1></center>
+                <form action="/addNewGroup" method="post" class="new-group-form">
+                    <select name="emails" id="new-group-select" multiple>
+                        <option th:if="${#lists.size(users) != 0}" th:each="user : ${users}" th:value="${user.email}" th:text="${user.email}">
+                    </select>
+                    <button type="submit" class="button-add-group btn btn-primary">Add group</button>
+                </form>
+            </div>
+
+            <div class="existing-groups">
+                <h1>Existing groups</h1>
+                <p th:if="${#lists.size(groups) == 0}" th:text="${'No available groups. Please add a new group.'}"></p>
+                <div class="group" th:each="group: ${groups}">
+                    <form action="/deleteGroup" method="post">
+                        <input type="text" hidden th:name="id" th:value="${group.id}">
+                        <ul th:each="person, status: ${#strings.arraySplit(group.participants, ',')}">
+                            <li class="user-group" th:text="${person}"></li>
+                        </ul>
+                        <button type="submit" class="btn btn-danger">Delete group</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /#page-content-wrapper -->
@@ -87,5 +111,4 @@
 <script th:src="@{js/checkShortcuts.js}"></script>
 
 </body>
-
 </html>
