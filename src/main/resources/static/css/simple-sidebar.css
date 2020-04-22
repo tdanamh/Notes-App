@@ -134,3 +134,10 @@ input.new-input {
   margin-bottom: 10px;
   padding: 10px;
 }
+
+.modal-text {
+  display: grid;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}

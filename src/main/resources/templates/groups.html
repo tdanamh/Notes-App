@@ -65,21 +65,21 @@
 
         <div class="container-fluid">
             <p class="successMessage" th:if="${successMessage != null}" th:text="${successMessage}"></p>
-
             <div class="new-group">
                 <center><h1>Add a new group</h1></center>
                 <form action="/addNewGroup" method="post" class="new-group-form">
+                    <input class="new-input" type="text" name="name" placeholder="Group Name..." required="true" autocomplete="off">
                     <select name="emails" id="new-group-select" multiple>
                         <option th:if="${#lists.size(users) != 0}" th:each="user : ${users}" th:value="${user.email}" th:text="${user.email}">
                     </select>
                     <button type="submit" class="button-add-group btn btn-primary">Add group</button>
                 </form>
             </div>
-
             <div class="existing-groups">
                 <h1>Existing groups</h1>
                 <p th:if="${#lists.size(groups) == 0}" th:text="${'No available groups. Please add a new group.'}"></p>
                 <div class="group" th:each="group: ${groups}">
+                    <h3 th:text="'Group ' + ${group.name}"></h3>
                     <form action="/deleteGroup" method="post">
                         <input type="text" hidden th:name="id" th:value="${group.id}">
                         <ul th:each="person, status: ${#strings.arraySplit(group.participants, ',')}">
