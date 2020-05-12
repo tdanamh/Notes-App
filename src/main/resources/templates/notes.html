@@ -66,30 +66,11 @@
         </nav>
 
         <div class="container-fluid">
+
             <p class="successMessage" th:if="${successMessage != null}" th:text="${successMessage}"></p>
-            <center><h1 class="mt-4">Would you like to add a new one?</h1></center>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <form action="/addNote" method="POST">
-                            <div class="card new-card" style="width: 18rem;">
-                                <div class="card-body new">
-                                    <input class="new-input" type="text" name="title" placeholder="Note Title..." required="true">
-                                    <input placeholder="Due date" class="new-input textbox-n" name="due" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
-                                    <input type="text" name="category" list="category-list" placeholder="Select a category..." class="new-input" autocomplete="off">
-                                    <datalist id="category-list">
-                                        <option th:if="${#lists.size(categories) != 0}" th:each="category : ${categories}" th:value="${category}">
-                                    </datalist>
-                                    <textarea id="new-text" class="new-input" name="text" placeholder="Note Text..." cols="25" rows="5"></textarea>
-                                    <button type="submit" class="new-note-button btn btn-dark">Add New Note</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <center><h1 class="mt-4">Your Notes</h1></center>
+
             <p th:if="${#lists.size(notes) == 0}" th:text="${'No available notes. Please add a new note.'}"></p>
+
             <div>
                 <form action="/notes" class="filter">
                     <h5>Filter by</h5>
@@ -100,6 +81,7 @@
                     <button type="submit" class="filter-button btn btn-danger">Apply filters</button>
                 </form>
             </div>
+
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4" th:each="note : ${notes}">
@@ -122,10 +104,49 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Image trigger modal -->
+            <a href="#myModal" role="button" data-toggle="modal" data-target="#addNotesModal" id="addNotesModalImage">
+                <img src="/images/icons/hand.png" alt="Add note image">
+            </a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="addNotesModal" tabindex="-1" role="dialog" aria-labelledby="addNotesModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addNotesModalLabel">Create a new note</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/addNote" method="POST">
+                            <div class="modal-body">
+                                <div class="card new-card" style="width: 18rem;">
+                                    <div class="card-body new">
+                                        <input class="new-input" type="text" name="title" placeholder="Note Title..." required="true">
+                                        <input placeholder="Due date" class="new-input textbox-n" name="due" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
+                                        <input type="text" name="category" list="category-list" placeholder="Select a category..." class="new-input" autocomplete="off">
+                                        <datalist id="category-list">
+                                            <option th:if="${#lists.size(categories) != 0}" th:each="category : ${categories}" th:value="${category}">
+                                        </datalist>
+                                        <textarea id="new-text" class="new-input" name="text" placeholder="Note Text..." cols="25" rows="5"></textarea>
+                                        <button type="submit" class="new-note-button btn btn-dark">Add New Note</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- /#page-content-wrapper -->
-
 </div>
 
 <!-- Modal -->
