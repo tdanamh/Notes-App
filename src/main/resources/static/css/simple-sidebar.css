@@ -141,3 +141,9 @@ input.new-input {
   margin-bottom: 10px;
   padding: 10px;
 }
+
+#addNotesModalImage {
+  bottom: 0px;
+  right: 5px;
+  position: absolute;
+}
